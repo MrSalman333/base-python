@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  db:
+    ports:
+      - "5440:5432"
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: dsadsa
+
+  api:
+    restart: unless-stopped
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "3001:80"
+    command: /start-reload.sh
+
+volumes:
+  postgres:
