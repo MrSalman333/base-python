@@ -1,3 +1,20 @@
+# Day2/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 postgres/
 config_local.py
 # Byte-compiled / optimized / DLL files
@@ -132,3 +149,4 @@ dmypy.json
 
 .idea/
 .DS_Store
+
