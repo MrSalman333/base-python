@@ -8,7 +8,8 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: dsadsa
+      POSTGRES_PASSWORD: dsadsa 
+      POSTGRES_USER : super # user postgres
 
   api:
     restart: unless-stopped
@@ -17,7 +18,17 @@ services:
       - db
     ports:
       - "3001:80"
+    environment:
+      - APP_NAME=todo
+      - DB_NAME=todo
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=super
+      - DB_PASSWORD=dsadsa
+    volumes:
+      - ./:/app/
     command: /start-reload.sh
+
 
 volumes:
   postgres:
