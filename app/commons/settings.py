@@ -28,6 +28,10 @@ class BaseConfig(BaseSettings):
     def SQLALCHEMY_DATABASE_URL(self) -> str:
         return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
+    AUTH_SALT: str = "74d50c79-8252-4c82-a3e1-627fce3b0f1b"
+    AUTH_JWT_KEY: str = "73b17a31-b7ef-4145-a538-b259414bbe4a"
+    AUTH_TOKEN_EXPIRE_IN: int = 600
+
 
 class ProductionConfig(BaseSettings):
     production = True
@@ -69,7 +73,3 @@ def current_config():
 
 
 config = current_config()
-
-
-config.DB_NAME
-config.SQLALCHEMY_DATABASE_URL
