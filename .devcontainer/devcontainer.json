@@ -22,7 +22,10 @@
 			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.linting.enabled": true,
-				"python.linting.pylintEnabled": true,
+				"python.linting.pylintEnabled": false,
+				"python.linting.mypyEnabled": true,
+				"python.linting.pylintUseMinimalCheckers": false,
+				"python.linting.flake8Enabled": true,
 				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
 				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
@@ -32,6 +35,11 @@
 				"python.linting.pycodestylePath": "/usr/local/py-utils/bin/pycodestyle",
 				"python.linting.pydocstylePath": "/usr/local/py-utils/bin/pydocstyle",
 				"python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
+				"python.sortImports.args": ["--settings-path", "/workspaces/base-python/tox.ini"],
+				"python.linting.mypyArgs": ["--config-file", "/workspaces/base-python/tox.ini"],
+				"python.linting.flake8Args": ["--config=/workspaces/base-python/tox.ini"],
+				"python.formatting.blackArgs":["--config", "/workspaces/base-python/.python-black"],
+				
 				"python.formatting.provider": "black",
 				"editor.formatOnSave": true,
 				"editor.bracketPairColorization.enabled": true,
@@ -43,9 +51,6 @@
 						"source.organizeImports": true
 					}
 				},
-				"python.linting.mypyEnabled": true,
-				"python.linting.pylintUseMinimalCheckers": false,
-				"python.linting.flake8Enabled": true,
 
 				"files.exclude": {
 					"**/.git": true,

@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  db:
+    ports:
+      - "5440:5432"
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: dsadsa 
+      POSTGRES_USER : super
+
+  api:
+    restart: unless-stopped
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "3001:80"
+    environment:
+      - APP_NAME=todo
+      - DB_NAME=todo
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=super
+      - DB_PASSWORD=dsadsa
+    volumes:
+      - ./:/app/
+    command: /start-reload.sh
+
+
+volumes:
+  postgres:
