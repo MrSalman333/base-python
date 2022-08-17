@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status
 
-from app.commons.dependices import get_db_session
+from app.commons.dependices import get_db_session, login_required
 
 from .schema import TodoCreateRequest, TodoResponse, TodoUpdateRequest
 from .services.create_a_todo import create_a_todo_
@@ -13,12 +13,12 @@ from .services.update_a_todo_by_id import update_a_todo_by_id_
 todo_router = APIRouter(prefix="/todo", tags=["todo"])
 
 
-@todo_router.get("/", response_model=list[TodoResponse])
+@todo_router.get("/", response_model=list[TodoResponse], dependencies=[Depends(login_required)])
 def get_list_of_todos(db_session=Depends(get_db_session)):
     return get_list_of_todos_(db_session)
 
 
-@todo_router.post("/", response_model=TodoResponse)
+@todo_router.post("/", response_model=TodoResponse, dependencies=[Depends(login_required)])
 def create_a_todo(
     body: TodoCreateRequest,
     db_session=Depends(get_db_session),
@@ -26,7 +26,7 @@ def create_a_todo(
     return create_a_todo_(body, db_session)
 
 
-@todo_router.get("/{todo_id}", response_model=TodoResponse)
+@todo_router.get("/{todo_id}", response_model=TodoResponse, dependencies=[Depends(login_required)])
 def get_a_todo_by_id(
     todo_id: str,
     db_session=Depends(get_db_session),
@@ -34,7 +34,7 @@ def get_a_todo_by_id(
     return get_a_todo_by_id_(todo_id, db_session)
 
 
-@todo_router.put("/{todo_id}", response_model=TodoResponse)
+@todo_router.put("/{todo_id}", response_model=TodoResponse, dependencies=[Depends(login_required)])
 def update_a_todo_by_id(
     todo_id: str,
     body: TodoUpdateRequest,
@@ -43,7 +43,7 @@ def update_a_todo_by_id(
     return update_a_todo_by_id_(todo_id, body, db_session)
 
 
-@todo_router.delete("/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
+@todo_router.delete("/{todo_id}", status_code=status.HTTP_204_NO_CONTENT, dependencies=[Depends(login_required)])
 def delete_a_todo_by_id(
     todo_id: str,
     db_session=Depends(get_db_session),
@@ -51,7 +51,7 @@ def delete_a_todo_by_id(
     return delete_a_todo_by_id_(todo_id, db_session)
 
 
-@todo_router.post("/{todo_id}/toggle", response_model=TodoResponse)
+@todo_router.post("/{todo_id}/toggle", response_model=TodoResponse, dependencies=[Depends(login_required)])
 def toggle_a_todo_by_id(
     todo_id: str,
     db_session=Depends(get_db_session),

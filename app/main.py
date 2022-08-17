@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 
 from app.api.todos.router import todo_router
+from app.api.users.router import user_router
 
-app = FastAPI()
+app = FastAPI(title="Todo App")
 app.include_router(todo_router)
+app.include_router(user_router)
 
 
 @app.on_event("startup")
@@ -17,6 +19,6 @@ def create_all_tables():
         create_database(engine.url)
 
     from app.api.todos import models  # noqa
+    from app.api.users import models  # noqa
 
-    Base.metadata.bind = engine
-    Base.metadata.create_all()
+    Base.metadata.create_all(engine)
