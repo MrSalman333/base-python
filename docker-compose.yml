@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    ports:
+      - "5440:5432"
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: super
+      POSTGRES_PASSWORD: password
+
+  api:
+    restart: unless-stopped
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "3001:80"
+    environment:
+      - APP_NAME=todo
+      - DB_NAME=todo
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=super
+      - DB_PASSWORD=password
+      - AUTH_SALT=74d50c79-8252-4c82-a3e1-627fce3b0f1b
+      - AUTH_JWT_KEY=853a2425299cbddbcf47ad387c150601888e4e3a64811044e30b6b73ee79276a
+      - AUTH_TOKEN_EXPIRE_IN=600
+      - AUTH_REFRESH_TOKEN_EXPIRE_IN=1000
+      - ALGORITHM=HS256
+    volumes:
+      - ./:/app/
+    command: /start-reload.sh # python app/main.py
+
+volumes:
+  postgres:

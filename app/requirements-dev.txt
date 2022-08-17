@@ -1,0 +1,5 @@
+-r ./requirements.ini
+
+sqlalchemy[mypy]
+
+pip-tools

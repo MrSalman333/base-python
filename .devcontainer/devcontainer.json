@@ -9,7 +9,7 @@
 			// Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
 			// Append -bullseye or -buster to pin to an OS version.
 			// Use -bullseye variants on local on arm64/Apple Silicon.
-			"VARIANT": "3.10",
+			"VARIANT": "3.9",
 			// Options
 			"NODE_VERSION": "none"
 		}
@@ -22,7 +22,7 @@
 			"settings": {
 				"python.defaultInterpreterPath": "/usr/local/bin/python",
 				"python.linting.enabled": true,
-				"python.linting.pylintEnabled": true,
+				"python.linting.pylintEnabled": false,
 				"python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
 				"python.formatting.yapfPath": "/usr/local/py-utils/bin/yapf",
@@ -64,7 +64,7 @@
 				"eamodio.gitlens",
 				"esbenp.prettier-vscode",
 				"ms-azuretools.vscode-docker",
-				"kevinglasson.cornflakes-linter",
+				"kevinglasson.cornflakes-linter"
 			]
 		}
 	},
