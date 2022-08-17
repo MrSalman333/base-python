@@ -1,4 +1,4 @@
--r ./requirements.ini
+-r ./requirements.txt
 
 sqlalchemy[mypy]
 
