@@ -29,6 +29,23 @@ services:
       - ./:/app/
     command: /start-reload.sh
 
+  pytest:
+    build: 
+      dockerfile: testing.Dockerfile
+    depends_on:
+      - db
+    environment:
+      - APP_NAME=todo
+      - DB_NAME=todo_test
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=super
+      - DB_PASSWORD=dsadsa
+      - ENVIRONMENT=testing
+    volumes:
+      - ./:/app/
+    command: pytest
+
 
 volumes:
   postgres:
