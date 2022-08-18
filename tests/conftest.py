@@ -44,8 +44,8 @@ def session():
 @pytest.fixture(scope="session")
 def client():
     """
-    Create a Postgres database for the tests, and drop it when the tests are done.
-    Creates s3 buckets and clears them after the tests are done.
+    Create a Postgres database for the tests, and drop it when the tests are done. # noqa
+    Creates s3 buckets and clears them after the tests are done. 
     """
 
     app.dependency_overrides[get_db_session] = get_db_session_overwrite
