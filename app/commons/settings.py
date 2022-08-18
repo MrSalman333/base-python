@@ -33,19 +33,19 @@ class BaseConfig(BaseSettings):
     AUTH_TOKEN_EXPIRE_IN: int = 600
 
 
-class ProductionConfig(BaseSettings):
+class ProductionConfig(BaseConfig):
     production = True
     testing = False
     ENVIRONMENT = "prod"
 
 
-class StagingConfig(BaseSettings):
+class StagingConfig(BaseConfig):
     production = True
     testing = False
     ENVIRONMENT = "staging"
 
 
-class TestingConfig(BaseSettings):
+class TestingConfig(BaseConfig):
     production = False
     testing = True
     ENVIRONMENT = "testing"

@@ -9,7 +9,7 @@ from .services.login import login_
 user_router = APIRouter(prefix="/user", tags=["user"])
 
 
-@user_router.post("/")
+@user_router.post("")
 def add_new_user(
     body: UserCreateRequest,
     db_session=Depends(get_db_session),

@@ -14,3 +14,4 @@ class Todo(Base):
     created_at: Mapped[datetime] = sa.Column(sa.DateTime, nullable=False, default=datetime.now)  # type: ignore
     title: Mapped[str] = sa.Column(sa.String, nullable=False)  # type: ignore
     is_chceked: Mapped[bool] = sa.Column(sa.Boolean, nullable=False, default=False)  # type: ignore
+    user_id: Mapped[str] = sa.Column(sa.ForeignKey("users.id"), nullable=False, index=True)  # type: ignore
