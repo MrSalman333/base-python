@@ -1,13 +1,10 @@
-import configparser
-import os
-import sys
 from datetime import datetime, timedelta
 from typing import Any, Union
 
 import bcrypt
 from jose import jwt
 
-from app.db.db import config
+from app.commons.db import config
 
 
 def get_hashed_password(password: str) -> str:
@@ -33,7 +30,7 @@ def create_access_token(subject: Union[str, Any], expires_delta: int = None) -> 
         expires_delta = datetime.now() + timedelta(seconds=config.AUTH_TOKEN_EXPIRE_IN)
 
     to_encode = {"exp": expires_delta, "sub": str(subject)}
-    encoded_jwt = jwt.encode(to_encode, config.AUTH_JWT_KEY, config)
+    encoded_jwt = jwt.encode(to_encode, config.AUTH_JWT_KEY, config.ALGORITHM)
     return encoded_jwt
 
 

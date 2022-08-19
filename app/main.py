@@ -2,13 +2,13 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import router
-from app.db.db import engine
-from app.db.models import Base
+from app.api.items import routes as items_routes
+from app.api.users import routes as auth_routes
 
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(items_routes.router)
+app.include_router(auth_routes.router)
 
 origins = [
     "http://localhost",
@@ -23,7 +23,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-Base.metadata.create_all(engine)
+
+@app.on_event("startup")
+def create_all_tables():
+    # NOTE: this is not good at all, it is a temp work around so we don't do the migration set up now
+    from sqlalchemy_utils import create_database, database_exists
+
+    from app.commons.db import engine
+    from app.commons.models import Base
+
+    if not database_exists(engine.url):
+        create_database(engine.url)
+
+    Base.metadata.create_all(engine)
+
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host='127.0.0.1', port=8000, log_level="info", reload=True)

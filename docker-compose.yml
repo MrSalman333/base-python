@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.10"
 
 services:
   db:
@@ -6,10 +6,30 @@ services:
       - "5440:5432"
     image: postgres
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres2:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: super
-      POSTGRES_PASSWORD: password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+
+  dev:
+    build: 
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - APP_NAME=todo
+      - DB_NAME=todo
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
+    network_mode: service:db
+
 
   api:
     restart: unless-stopped
@@ -23,8 +43,8 @@ services:
       - DB_NAME=todo
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_USER=super
-      - DB_PASSWORD=password
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
       - AUTH_SALT=74d50c79-8252-4c82-a3e1-627fce3b0f1b
       - AUTH_JWT_KEY=853a2425299cbddbcf47ad387c150601888e4e3a64811044e30b6b73ee79276a
       - AUTH_TOKEN_EXPIRE_IN=600
@@ -34,5 +54,26 @@ services:
       - ./:/app/
     command: /start-reload.sh # python app/main.py
 
+
+  pytest:
+    build: 
+      dockerfile: Dockerfile
+      context: .
+      target: dev
+    depends_on:
+      - db
+    environment:
+      - APP_NAME=todo
+      - DB_NAME=todo_test
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=super
+      - DB_PASSWORD=dsadsa
+      - ENVIRONMENT=testing
+    volumes:
+      - ./:/app/
+    command: pytest
+
+
 volumes:
-  postgres:
+  postgres2:

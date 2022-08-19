@@ -1,19 +1,20 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.db.db import Session, get_db
-from app.db.models import Item
+from app.commons.db import Session, get_db
+from app.commons.models import Item
 
 from .schemas import ItemRequest, ItemResponse
 
 router = APIRouter(
-    prefix="/items"
+    prefix="/api/items"
 )
 
 
 @router.get("/")
 async def all_items(session: Session = Depends(get_db)):
-    all_items = session.query(Item).all()
+    all_items = session.query(Item).limit(10).all()
     return all_items
+
 
 @router.post("/")
 async def add_item(item: ItemRequest, session: Session = Depends(get_db)):
