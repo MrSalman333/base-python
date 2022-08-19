@@ -31,7 +31,10 @@ services:
 
   api:
     restart: unless-stopped
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: production
     depends_on:
       - db
     ports:
@@ -49,8 +52,9 @@ services:
 
   pytest:
     build: 
-      dockerfile: testing.Dockerfile
+      dockerfile: Dockerfile
       context: .
+      target: dev
     depends_on:
       - db
     environment:
