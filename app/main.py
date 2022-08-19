@@ -29,15 +29,9 @@ def create_all_tables():
     # NOTE: this is not good at all, it is a temp work around so we don't do the migration set up now
     from sqlalchemy_utils import create_database, database_exists
 
-    from app.commons.db import engine
-    from app.commons.models import Base
+    from app.commons.db import Base, engine
 
     if not database_exists(engine.url):
         create_database(engine.url)
 
     Base.metadata.create_all(engine)
-
-
-if __name__ == '__main__':
-    uvicorn.run("main:app", host='127.0.0.1', port=8000, log_level="info", reload=True)
-    print("running")

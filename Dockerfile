@@ -29,6 +29,19 @@ COPY app .
 CMD ["/start.sh"]
 # CMD [ "/start-reload.sh" ]
 
+
 FROM production AS dev
 
 RUN pip install -r ./requirements-dev.txt
+
+
+# FROM production AS testing
+
+# COPY app/requirements.txt requirements.txt
+# COPY app/requirements-dev.txt requirements-dev.txt
+
+# RUN pip install -r requirements-dev.txt
+
+# COPY . .
+
+# CMD [ "pytest" ]

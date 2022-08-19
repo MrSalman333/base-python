@@ -3,8 +3,7 @@ from fastapi.testclient import TestClient
 from pytest_postgresql.janitor import DatabaseJanitor
 from sqlalchemy.orm import scoped_session
 
-from app.commons.database import SessionLocal, engine
-from app.commons.dependices import get_db_session
+from app.commons.db import SessionLocal, engine, get_db
 from app.commons.settings import config
 from app.main import app
 from tests.data import SeedData
@@ -48,7 +47,7 @@ def client():
     Creates s3 buckets and clears them after the tests are done.
     """
 
-    app.dependency_overrides[get_db_session] = get_db_session_overwrite
+    app.dependency_overrides[get_db] = get_db_session_overwrite
 
     janitor = DatabaseJanitor(
         user=config.DB_USER,
@@ -65,9 +64,8 @@ def client():
         print(e)
 
     # create all the tables
-    from app.api.todos import models  # noqa
-    from app.api.users import models  # noqa
-    from app.commons.database import Base
+    from app.api import models  # noqa
+    from app.commons.db import Base
 
     Base.metadata.create_all(engine)
 
@@ -88,9 +86,9 @@ def seed_data(client: TestClient):
     data = SeedData()
 
     for user in data.users:
-        response = client.post("/user", json=user)
+        response = client.post("/api/users", json=user)
         assert response.status_code == 200
-        response = client.post("/user/login", json=user)
+        response = client.post("/api/users/login", json=user)
         assert response.status_code == 200
         data.users_tokens.append(response.json()["access_token"])
 

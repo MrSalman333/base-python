@@ -52,7 +52,7 @@ services:
       - ALGORITHM=HS256
     volumes:
       - ./:/app/
-    command: /start-reload.sh # python app/main.py
+    command: /start-reload.sh
 
 
   pytest:
@@ -67,8 +67,8 @@ services:
       - DB_NAME=todo_test
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_USER=super
-      - DB_PASSWORD=dsadsa
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
       - ENVIRONMENT=testing
     volumes:
       - ./:/app/

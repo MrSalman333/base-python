@@ -22,10 +22,10 @@ async def get_verified_current_user(token: Optional[str] = Depends(oauth2_scheme
 
     try:
         payload = jwt.decode(token, config.AUTH_JWT_KEY, algorithms=[config.ALGORITHM])
-        email: str = payload.get("sub")
-        if email is None:
+        username: str = payload.get("sub")
+        if username is None:
             raise credentials_exception
-        verified_and_decoded_token_data = TokenData(email=email)
+        verified_and_decoded_token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
     return verified_and_decoded_token_data

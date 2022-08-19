@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 
+from app.api.models import Item
 from app.commons.db import Session, get_db
-from app.commons.models import Item
 
 from .schemas import ItemRequest, ItemResponse
 

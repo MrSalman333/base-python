@@ -3,3 +3,10 @@
 sqlalchemy[mypy]
 
 pip-tools
+
+# [ TEST ] 
+pytest
+pytest_postgresql # for janitor
+psycopg[binary] # for janitor
+mypy
+requests

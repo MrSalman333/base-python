@@ -8,15 +8,15 @@ from tests.data import SeedData
 def create_a_todo_for_2_users(client: TestClient, seed_data: SeedData):
 
     res = client.post(
-        url="/todo",
-        json={"title": "user1 todo"},
+        url="/api/items",
+        json={"name": "user1 todo"},
         headers={"Authorization": f"Bearer {seed_data.users_tokens[0]}"},
     )
     assert res.status_code == 200
 
     res = client.post(
-        url="/todo",
-        json={"title": "user2 todo"},
+        url="/api/items",
+        json={"name": "user2 todo"},
         headers={"Authorization": f"Bearer {seed_data.users_tokens[1]}"},
     )
     assert res.status_code == 200
@@ -27,7 +27,7 @@ def create_a_todo_for_2_users(client: TestClient, seed_data: SeedData):
 def test_list_todos_by_user(client: TestClient, seed_data: SeedData, create_a_todo_for_2_users):
 
     res = client.get(
-        url="/todo",
+        url="/api/items",
         headers={"Authorization": f"Bearer {seed_data.users_tokens[0]}"},
     )
     assert res.status_code == 200
@@ -35,7 +35,7 @@ def test_list_todos_by_user(client: TestClient, seed_data: SeedData, create_a_to
     assert res.json()[0]["title"] == "user1 todo"
 
     res = client.get(
-        url="/todo",
+        url="/api/items",
         headers={"Authorization": f"Bearer {seed_data.users_tokens[1]}"},
     )
     assert res.status_code == 200

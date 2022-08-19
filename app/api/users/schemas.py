@@ -8,12 +8,10 @@ from pydantic import BaseModel, validator
 class UserResponse(BaseModel):
      id: UUID
      username: str
-     email: str
     
 
 class UserRequest(BaseModel):
      username: str
-     # email: str
      password: str
      
      @validator("username")
@@ -26,16 +24,6 @@ class UserRequest(BaseModel):
           
           return username 
      
-     # @validator("email")
-     # def validate_email(cls, email):
-     #      if not email:
-     #           raise AssertionError("no Email was provided")
-          
-     #      if not re.match("[^@]+@[^@]+\.[^@]+", email):
-     #           raise AssertionError("Provided email is not an email address") 
-          
-     #      return email
-     
      @validator("password")
      def validate_password(cls, password):
           if not password:
@@ -45,4 +33,4 @@ class UserRequest(BaseModel):
      
 
 class TokenData(BaseModel):
-    email: Union[str, None] = None
+    username: Union[str, None] = None
