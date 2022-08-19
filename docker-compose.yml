@@ -6,13 +6,13 @@ services:
       - "5440:5432"
     image: postgres
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres2:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: dsadsa 
-      POSTGRES_USER : super
+      POSTGRES_PASSWORD: dsadsa
+      POSTGRES_USER: super
 
   dev:
-    build: 
+    build:
       context: .
       dockerfile: .devcontainer/Dockerfile
     depends_on:
@@ -31,7 +31,7 @@ services:
 
   api:
     restart: unless-stopped
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       target: production
@@ -51,7 +51,7 @@ services:
     command: /start-reload.sh
 
   pytest:
-    build: 
+    build:
       dockerfile: Dockerfile
       context: .
       target: dev
@@ -69,6 +69,5 @@ services:
       - ./:/app/
     command: pytest
 
-
 volumes:
-  postgres:
+  postgres2:
