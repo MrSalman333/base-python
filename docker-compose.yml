@@ -11,9 +11,30 @@ services:
       POSTGRES_PASSWORD: dsadsa 
       POSTGRES_USER : super
 
+  dev:
+    build: 
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - APP_NAME=todo
+      - DB_NAME=todo
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=super
+      - DB_PASSWORD=dsadsa
+    volumes:
+      - .:/workspace:cached
+    command: sleep infinity
+    network_mode: service:db
+
   api:
     restart: unless-stopped
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: production
     depends_on:
       - db
     ports:
@@ -31,7 +52,9 @@ services:
 
   pytest:
     build: 
-      dockerfile: testing.Dockerfile
+      dockerfile: Dockerfile
+      context: .
+      target: dev
     depends_on:
       - db
     environment:
