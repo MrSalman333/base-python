@@ -9,9 +9,9 @@ jobs:
         run: docker compose run --rm pytest
       - name: test fails
         if: failure()
-        print: "Tests finished NOT succesfully"
+        run: "Tests finished NOT succesfully"
       # - name: test
       #   run: docker compose run --rm pytest
       - name: test passes
         if: success()
-        print: "Tests finished succesfully"
+        run: "Tests finished succesfully"
