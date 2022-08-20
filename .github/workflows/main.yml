@@ -6,14 +6,14 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: test
-        run: docker compose run --rm pytest > stdout.txt 2> stderr.txt
-      - name: test fails
-        if: failure()
-        run: |
-          line=$(head -n 2 stderr.txt )
-          curl -d "username=${{ github.actor }}&repo=${{ github.repository }}&test=$line"
-      - name: test
         run: docker compose run --rm pytest
+      - name: test fails
+        # if: failure()
+        # run: |
+        #   line=$(head -n 2 stderr.txt )
+        #   curl -d "username=${{ github.actor }}&repo=${{ github.repository }}&test=$line"
+      # - name: test
+      #   run: docker compose run --rm pytest
       - name: test passes
         if: success()
         run: "Tests finished succesfullt"
