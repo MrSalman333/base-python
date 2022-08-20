@@ -1,5 +1,5 @@
 name: main
-on: [pytest]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
