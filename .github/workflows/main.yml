@@ -5,13 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: test
-        run: docker compose run --rm pytest
-      - name: test fails
-        if: failure()
-        run: "Tests finished NOT succesfully"
-      # - name: test
-      #   run: docker compose run --rm pytest
-      - name: test passes
-        if: success()
-        run: "Tests finished succesfully"
+      - name: Test with pytest
+        run: |
+          pytest
