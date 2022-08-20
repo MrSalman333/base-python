@@ -12,6 +12,10 @@ jobs:
       - name: Test with pytest
         run: docker compose run --rm pytest
         if: failure()
-        title: "Test with pytest failed"
+        with:
+          message: |
+           "Test with pytest failed"
         if: success()
-        title: "Test with pytest passed"
+        with:
+          message: |
+           "Test with pytest passed"
