@@ -1,18 +1,18 @@
-import uvicorn
+# import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.items import routes as items_routes
-from app.api.users import routes as auth_routes
+from app.api.users import routes as users_routes
 
 app = FastAPI()
 
 app.include_router(items_routes.router)
-app.include_router(auth_routes.router)
+app.include_router(users_routes.router)
 
 origins = [
     "http://localhost",
-    "http://localhost:8000",
+    "http://localhost:3001",
 ]
 
 app.add_middleware(

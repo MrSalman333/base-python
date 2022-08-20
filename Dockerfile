@@ -26,8 +26,8 @@ RUN apt-get update \
 
 COPY app .
 
-CMD ["/start.sh"]
-# CMD [ "/start-reload.sh" ]
+# CMD ["/start.sh"]
+CMD [ "/start-reload.sh" ]
 
 
 FROM production AS dev

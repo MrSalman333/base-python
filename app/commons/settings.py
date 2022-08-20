@@ -48,20 +48,33 @@ class StagingConfig(BaseSettings):
 
 
 class TestingConfig(BaseSettings):
+    # this is for auto complate
     production = False
     testing = True
     ENVIRONMENT = "testing"
+    APP_NAME: str = "todo_test"
+
+    # the allowed browser sites requests
+    ALLOWED_CORS_ORIGINS = ["*"]
+    ALLOWED_HOSTS: list[str] = ["*"]
+
     # db configs
     DB_USER: str
     DB_PASSWORD: str
     DB_NAME: str
     DB_HOST: str
     DB_PORT: int
-    
+
     # generate SQLALCHEMY_DATABASE_URL dynamically
     @property
     def SQLALCHEMY_DATABASE_URL(self) -> str:
         return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
+    AUTH_SALT: str
+    AUTH_JWT_KEY: str
+    AUTH_TOKEN_EXPIRE_IN: int = 600
+    AUTH_REFRESH_TOKEN_EXPIRE_IN: int = 1000
+    ALGORITHM: str
 
 
 @lru_cache()

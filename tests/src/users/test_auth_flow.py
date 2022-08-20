@@ -1,9 +1,9 @@
-from fastapi.testclient import TestClient
+# from fastapi.testclient import TestClient
 
-from tests.data import SeedData
+# from tests.data import SeedData
 
 
-def test_auth_errors(client: TestClient, seed_data: SeedData):
-    """
-    TODO: write tests here
-    """
+# def test_auth_errors(client: TestClient, seed_data: SeedData):
+#     """
+#     TODO: write tests here
+#     """

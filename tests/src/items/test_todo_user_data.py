@@ -8,14 +8,14 @@ from tests.data import SeedData
 def create_a_todo_for_2_users(client: TestClient, seed_data: SeedData):
 
     res = client.post(
-        url="/api/items",
+        url="/api/items/",
         json={"name": "user1 todo"},
         headers={"Authorization": f"Bearer {seed_data.users_tokens[0]}"},
     )
     assert res.status_code == 200
 
     res = client.post(
-        url="/api/items",
+        url="/api/items/",
         json={"name": "user2 todo"},
         headers={"Authorization": f"Bearer {seed_data.users_tokens[1]}"},
     )

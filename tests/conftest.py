@@ -86,7 +86,7 @@ def seed_data(client: TestClient):
     data = SeedData()
 
     for user in data.users:
-        response = client.post("/api/users", json=user)
+        response = client.post("/api/users/", json=user)
         assert response.status_code == 200
         response = client.post("/api/users/login", json=user)
         assert response.status_code == 200
