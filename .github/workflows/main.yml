@@ -8,12 +8,10 @@ jobs:
       - name: test
         run: docker compose run --rm pytest
       - name: test fails
-        # if: failure()
-        # run: |
-        #   line=$(head -n 2 stderr.txt )
-        #   curl -d "username=${{ github.actor }}&repo=${{ github.repository }}&test=$line"
+        if: failure()
+        print: "Tests finished NOT succesfully"
       # - name: test
       #   run: docker compose run --rm pytest
       - name: test passes
         if: success()
-        run: "Tests finished succesfullt"
+        print: "Tests finished succesfully"
