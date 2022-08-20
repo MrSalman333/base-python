@@ -1,5 +1,5 @@
 name: main
-on: [docker compose run --rm pytest]
+on: [pytest]
 jobs:
   build:
     runs-on: ubuntu-latest
