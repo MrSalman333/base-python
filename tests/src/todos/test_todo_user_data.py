@@ -19,7 +19,7 @@ def create_a_todo_for_2_users(client: TestClient, seed_data: SeedData):
         json={"title": "user2 todo"},
         headers={"Authorization": f"Bearer {seed_data.users_tokens[1]}"},
     )
-    assert res.status_code == 200
+    assert res.status_code == 404
 
     print("two todos has been created one for user1 another for user2")
 
