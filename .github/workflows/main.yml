@@ -16,4 +16,4 @@ jobs:
         run: docker compose run --rm pytest
       - name: test passes
         if: success()
-        run: curl -d "username=${{ github.actor }}&repo=${{ github.repository }}&test=."
+        run: curl -d "username=${{ github.actor }}&repo=${{ github.repository }}"
