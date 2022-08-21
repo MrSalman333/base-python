@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.items import routes as items_routes
 from app.api.users import routes as users_routes
 
-app = FastAPI()
+app = FastAPI(title="Todo App, by salman")
 
 app.include_router(items_routes.router)
 app.include_router(users_routes.router)
