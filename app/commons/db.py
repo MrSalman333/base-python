@@ -3,7 +3,11 @@ from sqlalchemy.orm import Session, declarative_base, sessionmaker
 
 from app.commons.settings import config
 
-engine = create_engine(config.SQLALCHEMY_DATABASE_URL, echo=True)
+engine = create_engine(
+    config.SQLALCHEMY_DATABASE_URL,
+    echo=True,
+    future=True,
+)
 
 Base = declarative_base()
 
@@ -12,6 +16,7 @@ SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
     expire_on_commit=False,
+    future=True,
 )
 
 
