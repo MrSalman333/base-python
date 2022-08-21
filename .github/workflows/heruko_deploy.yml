@@ -16,7 +16,7 @@ jobs:
         run: docker login --username=_ --password=${{secrets.DOCKER_PASS}}  registry.heroku.com
       
       - name: docker build 
-        run: docker build --target=production -t registry.heroku.com/mrsalman-todo-app/web ..
+        run: docker build --target=production -t registry.heroku.com/mrsalman-todo-app/web .
       
       - name: docker push 
         run: docker push registry.heroku.com/mrsalman-todo-app/web
