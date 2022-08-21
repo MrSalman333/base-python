@@ -1,0 +1,11 @@
+name: GitHub Actions
+
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+      - run: docker compose run --rm pytest
