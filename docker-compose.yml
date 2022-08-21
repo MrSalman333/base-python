@@ -56,7 +56,7 @@ services:
       context: .
       target: dev
     depends_on:
-      - db
+      - api
     environment:
       - APP_NAME=todo
       - DB_NAME=todo_test
@@ -67,7 +67,8 @@ services:
       - ENVIRONMENT=testing
     volumes:
       - ./:/app/
-    command: pytest
+    command: /start-test.sh
+    # command: pytest
 
 
 volumes:

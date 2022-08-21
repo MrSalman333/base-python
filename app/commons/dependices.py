@@ -22,13 +22,13 @@ def get_db_session():
 
 
 def get_verified_current_user_or_none(
-    token: Optional[str] = Depends(OAuth2PasswordBearer(tokenUrl="user/login", auto_error=False))
+    token: Optional[str] = Depends(OAuth2PasswordBearer(tokenUrl="user/login", auto_error=False)) # noqa
 ):
     if token is None:
         return None
 
     try:
-        varified_and_decoded_token = jwt.decode(token, config.AUTH_JWT_KEY, algorithms=["HS256"])
+        varified_and_decoded_token = jwt.decode(token, config.AUTH_JWT_KEY, algorithms=["HS256"]) # noqa
     except jwt.InvalidTokenError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -39,7 +39,7 @@ def get_verified_current_user_or_none(
     return varified_and_decoded_token
 
 
-def login_required(payload: Optional[dict] = Depends(get_verified_current_user_or_none)):
+def login_required(payload: Optional[dict] = Depends(get_verified_current_user_or_none)): # noqa
     """
     we are sure to have the token since we have auto_error = True
     """

@@ -1,3 +1,22 @@
+app_Day3/
+app_Day4/
+app_old/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 postgres/
 config_local.py
 # Byte-compiled / optimized / DLL files
@@ -132,3 +151,4 @@ dmypy.json
 
 .idea/
 .DS_Store
+

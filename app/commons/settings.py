@@ -26,7 +26,7 @@ class BaseConfig(BaseSettings):
     # generate SQLALCHEMY_DATABASE_URL dynamically
     @property
     def SQLALCHEMY_DATABASE_URL(self) -> str:
-        return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}" # noqa
 
     AUTH_SALT: str = "74d50c79-8252-4c82-a3e1-627fce3b0f1b"
     AUTH_JWT_KEY: str = "73b17a31-b7ef-4145-a538-b259414bbe4a"
@@ -54,7 +54,7 @@ class TestingConfig(BaseConfig):
 @lru_cache()
 def current_config():
     """
-    this will load the required config passed on STAGE env if not set it will load LocalConfig
+    this will load the required config passed on STAGE env if not set it will load LocalConfig # noqa
     """
     stage = os.environ.get("ENVIRONMENT", "local")
 
