@@ -4,7 +4,11 @@ name: Pytest CI
 on:
   # Triggers the workflow on pull request events but only for the "master" branch
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - "master"
+  push:
+    branches:
+      - "master"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
