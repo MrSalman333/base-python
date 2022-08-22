@@ -30,5 +30,5 @@ CMD ["/start.sh"]
 
 FROM production AS dev
 
-RUN pip install -r ./requirements-dev.txt
+RUN pip install -r /app/requirements-dev.txt
 
