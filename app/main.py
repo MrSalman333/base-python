@@ -6,7 +6,7 @@ from app.api.todos.router import todo_router
 from app.api.users.router import user_router
 from app.commons.settings import config
 
-app = FastAPI(title="Todo App")
+app = FastAPI(title="Todo App, by salman")
 app.include_router(todo_router)
 app.include_router(user_router)
 

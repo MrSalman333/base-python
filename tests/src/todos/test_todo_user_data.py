@@ -12,7 +12,7 @@ def create_a_todo_for_2_users(client: TestClient, seed_data: SeedData):
         json={"title": "user1 todo"},
         headers={"Authorization": f"Bearer {seed_data.users_tokens[0]}"},
     )
-    assert res.status_code == 200
+    assert res.status_code == 400
 
     res = client.post(
         url="/todo",
