@@ -2,13 +2,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
+from app.api.auth.router import auth_router
 from app.api.todos.router import todo_router
 from app.api.users.router import user_router
 from app.commons.settings import config
 
 app = FastAPI(title="Todo App")
-app.include_router(todo_router)
-app.include_router(user_router)
+# app.include_router(todo_router)
+# app.include_router(user_router)
+app.include_router(auth_router)
 
 app.add_middleware(CORSMiddleware, allow_origins=config.ALLOWED_CORS_ORIGINS)
 app.add_middleware(GZipMiddleware)
